@@ -29,10 +29,6 @@
 	}
 }
 
-.signup__step {
-	overflow: hidden;
-}
-
 // Signup headings
 .is-section-signup .formatted-header {
 	margin: 16px 0 24px 0;
@@ -51,7 +47,6 @@
 
 
 // Skip button 
-
 .step-wrapper__buttons {
 	text-align: center;	
 }
@@ -62,6 +57,10 @@
 	position: absolute;
 	top: 12px;
 	left: 16px;
+}
+
+.signup__step {
+	overflow: hidden;
 }
 
 
