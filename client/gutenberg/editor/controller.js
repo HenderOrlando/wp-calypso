@@ -102,7 +102,7 @@ export const loadGutenbergBlockAvailability = store => {
 			set( window, [ JETPACK_DATA_PATH, 'available_blocks' ], blockAvailability.data );
 		}
 	} );
-}
+};
 
 export const redirect = ( { store: { getState } }, next ) => {
 	const state = getState();
@@ -136,7 +136,9 @@ export const post = async ( context, next ) => {
 		const Editor = initGutenberg( userId, siteSlug );
 
 		return props => (
-			<Editor { ...{ siteId, postId, postType, uniqueDraftKey, isDemoContent, ...props } } />
+			<Editor
+				{ ...{ siteId, siteSlug, postId, postType, uniqueDraftKey, isDemoContent, ...props } }
+			/>
 		);
 	} );
 
