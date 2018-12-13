@@ -4,11 +4,11 @@
     "map",
     "markdown",
     "publicize",
-    "simple-payments"
+    "simple-payments",
+    "tiled-gallery"
   ],
   "beta": [
     "related-posts",
-    "tiled-gallery",
     "vr"
   ]
 }
