@@ -16,6 +16,13 @@ import { savePreference, setPreference } from 'state/preferences/actions';
 import { getPreference } from 'state/preferences/selectors';
 import getColorSchemesData from './constants';
 import FormRadiosBar from 'components/forms/form-radios-bar';
+import {
+	composeAnalytics,
+	withAnalytics,
+	recordTracksEvent,
+	recordGoogleEvent,
+	bumpStat,
+} from 'state/analytics/actions';
 
 /**
  * Style dependencies
@@ -64,8 +71,22 @@ class ColorSchemePicker extends PureComponent {
 
 const saveColorSchemePreference = ( preference, temporarySelection ) =>
 	temporarySelection
-		? setPreference( 'colorScheme', preference )
-		: savePreference( 'colorScheme', preference );
+		? withAnalytics(
+				composeAnalytics(
+					recordTracksEvent( 'calypso_color_theme_set', { theme: preference } ),
+					recordGoogleEvent( 'Color Theme', 'Set', 'theme', preference ),
+					bumpStat( 'calypso_color_scheme', 'set' )
+				),
+				setPreference( 'colorScheme', preference )
+		  )
+		: withAnalytics(
+				composeAnalytics(
+					recordTracksEvent( 'calypso_color_theme_saved', { theme: preference } ),
+					recordGoogleEvent( 'Color Theme', 'Saved', 'theme', preference ),
+					bumpStat( 'calypso_color_scheme', 'save' )
+				),
+				savePreference( 'colorScheme', preference )
+		  );
 
 export default connect(
 	state => {
